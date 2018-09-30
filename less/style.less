@@ -1,0 +1,173 @@
+@gearcolor: white;
+@bg : indianred;
+@animation-timing-function: ease-in-out;
+@animation-duration: 5s;
+
+@import url(https://fonts.googleapis.com/css?family=Share+Tech);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: @bg;
+}
+
+.container {
+  width:320px;
+  height:320px;
+  margin: 0 auto;
+  position:relative;
+}
+
+.bigwheel {
+  width:320px;
+  height:320px;
+  position: absolute;
+  background-color: @gearcolor;
+  border-radius: 50%;
+  animation: bigwheel @animation-duration @animation-timing-function infinite;
+}
+
+@keyframes bigwheel {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+.tooth3 {
+  width:18px;
+  height:292px;
+  background-color:@bg;
+  position:absolute;
+  top: 14px;
+  left:151px;
+}
+
+.tooth3:nth-child(odd) {
+  height:272px;
+  top: 24px;
+}
+
+.mixin-loop (@i) when (@i < 32) {
+  .tooth3:nth-child(@{i}) {
+    transform: rotate(5.625deg * @i);
+  }
+  .mixin-loop(@i + 1);
+}
+
+.mixin-loop(1);
+
+.gears {
+  position:relative;
+  width:284px;
+  height:284px;
+  left:18px;
+  top:18px;
+}
+
+.gear {
+  width:100px;
+  height:100px;
+  position:absolute;
+  animation: gear @animation-duration @animation-timing-function infinite;
+}
+
+.gear:nth-child(1) {
+  top:0;
+	left:92px; 
+}
+  
+.gear:nth-child(2) {
+  top:92px;
+  left:92px;
+  transform: rotate(22deg);
+  animation: gear2 @animation-duration @animation-timing-function infinite;
+}
+
+.gear:nth-child(3) {
+  left: 92px;
+  top: 184px;
+}
+
+.gear:nth-child(4) {
+  left: 0;
+  top: 92px;
+}
+
+.gear:nth-child(5) {
+  left:184px;
+  top:92px;
+}
+
+.teeth {
+  width:100%;
+  height:100%;
+  position: absolute;
+}
+
+.tooth {
+  position:absolute;
+  left:42px;
+  width:16px;
+  height:100px;
+  background-color: @gearcolor;
+}
+
+.mixin-loop2 (@i) when (@i < 16) {
+  .tooth:nth-child(@{i}) {
+    transform: rotate(22.5deg * @i);
+  }
+  .mixin-loop2(@i + 1);
+}
+
+.mixin-loop2(1);
+
+
+.tooth:nth-child(odd) {
+  top:10px;
+  height:80px;
+}
+
+@keyframes gear {
+  to {
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes gear2 {
+  from {
+    transform: rotate(22deg);
+  }
+  to {
+    transform:rotate(-338deg);
+  }
+}
+
+.center {
+  position:absolute;
+  top:20px;
+  left:20px;
+  background-color: @bg;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+}
+
+.text {
+  z-index:100;
+  padding-top:37px;
+}
+
+.text span {
+  display: block;
+  transform: rotate(90deg);
+  font-size: .8em;
+  font-family: 'Share Tech';
+  color: @bg;
+  font-weight: 400;
+}
+
